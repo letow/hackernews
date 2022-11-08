@@ -4,6 +4,7 @@ import { NewsData } from "../../Types/NewsData";
 import NewsItem from "../NewsItem/NewsItem";
 import Paper from "@mui/material/Paper";
 import s from "./Main.module.scss";
+import { Link } from "react-router-dom";
 
 interface IMainProps {
   data?: NewsData;
@@ -14,9 +15,15 @@ const Main: FC<IMainProps> = () => {
   return (
     <div className={s.Main}>
       {news.map((item: NewsData) => (
-        <Paper key={item.id} elevation={3}>
-          <NewsItem data={item} />
-        </Paper>
+        <Link
+          style={{ textDecoration: "none" }}
+          key={item.id}
+          to={`/page/${item.id}`}
+        >
+          <Paper elevation={3}>
+            <NewsItem data={item} />
+          </Paper>
+        </Link>
       ))}
     </div>
   );

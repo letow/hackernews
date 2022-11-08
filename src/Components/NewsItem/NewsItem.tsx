@@ -11,9 +11,8 @@ interface INewsItemProps {
 
 const NewsItem: FC<INewsItemProps> = ({ ...props }: INewsItemProps) => {
   const { rating, username, date, title } = props.data;
-  const dispatch = useDispatch();
   return (
-    <div className={s.NewsItem} onClick={() => dispatch(increment())}>
+    <div className={s.NewsItem}>
       <div className={s.info}>
         <Rating value={rating} readOnly size="small" precision={0.1} />
         <span className={s.nickname}>Posted by {username}</span>

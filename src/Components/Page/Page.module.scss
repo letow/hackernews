@@ -1,0 +1,16 @@
+.Page {
+  padding: 20px;
+  position: relative;
+  border: 2px solid black;
+}
+.info {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.back {
+  position: absolute !important;
+  left: 1em;
+  top: 1em;
+}

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { increment } from "../../Redux/mainSlice";
 import { NewsData } from "../../Types/NewsData";

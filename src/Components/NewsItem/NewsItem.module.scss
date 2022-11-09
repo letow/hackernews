@@ -13,15 +13,23 @@
 .info {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.25em;
 }
+
 .pub_date {
   opacity: 0.7;
 }
 
+.rating {
+  color: darkorange;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
 .counter {
   &::after {
-    content: "";
+    content: "C";
     position: absolute;
     right: 0;
     bottom: 0;

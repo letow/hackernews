@@ -37,7 +37,7 @@ const Page: FC<IPageProps> = (props) => {
 
   return (
     <Paper elevation={3}>
-      <div className={`${s.Page} ${status === "loading" ? s.loading : ""}`}>
+      <div className={s.Page}>
         <Button
           className={s.back}
           variant="outlined"
@@ -46,7 +46,7 @@ const Page: FC<IPageProps> = (props) => {
         >
           &#60; Back
         </Button>
-
+        Source:{" "}
         <a href={data.url} className={s.link}>
           {data.url}
         </a>

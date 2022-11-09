@@ -21,32 +21,31 @@ const decodeHTML = (text: string) => {
 const Comment: FC<ICommentProps> = ({ data }) => {
   const status = useSelector((state: State) => state.status);
   const dispatch = useDispatch<AppDispatch>();
-
+  console.log(data.kidsIds);
   return (
-    <Paper elevation={3} className={s.Comment}>
-      <div className={s.info}>
-        <span>
-          <strong>{data.username}</strong>
-        </span>
-        <span className={s.time}>{data.time}</span>
-      </div>
-      <div className={s.text}>{decodeHTML(data.text)}</div>
-
-      {data.kidsIds ? (
-        <LoadingButton
-          loading={status === "loading"}
-          size="small"
-          className={s.show_more}
-          onClick={() =>
-            data.kidsIds!.forEach((kid: number) => dispatch(fetchOneItem(kid)))
-          }
+    <div
+    /* onClick={
+        data.kidsIds
+          ? () =>
+              data.kidsIds!.forEach((kid: number) =>
+                dispatch(fetchOneItem(kid))
+              )
+          : () => ""
+      } */
+    >
+      <Paper elevation={3} className={s.Comment}>
+        <div
+          className={s.info}
+          style={data.kidsIds ? { backgroundColor: "cyan" } : {}}
         >
-          Show {data.kidsIds.length} replies
-        </LoadingButton>
-      ) : (
-        <></>
-      )}
-    </Paper>
+          <span>
+            <strong>{data.username}</strong>
+          </span>
+          <span className={s.time}>{data.time}</span>
+        </div>
+        <div className={s.text}>{decodeHTML(data.text)}</div>
+      </Paper>
+    </div>
   );
 };
 

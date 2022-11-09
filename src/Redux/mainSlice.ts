@@ -45,25 +45,31 @@ const mainSlice = createSlice({
         if (state.news.length === state.lastNewsIDs.length)
           state.news.sort((a, b) => (a.date < b.date ? 1 : -1));
       } else if (action.payload.type === "comment") {
-        const newsId = JSON.parse(JSON.stringify(state)).news.findIndex(
-          (obj: NewsData) => obj.id === action.payload.parent
-        );
-
         const payload = {
           username: action.payload.by,
           id: action.payload.id,
-          kids: action.payload.kids,
+          kidsIds: action.payload.kids,
+          kids: [],
           parent: action.payload.parent,
           text: action.payload.text,
           time: new Date(action.payload.time * 1000).toLocaleString(),
         } as CommentData;
 
-        state.news[newsId].kids.push(payload);
+        const newsId = JSON.parse(JSON.stringify(state)).news.findIndex(
+          (obj: NewsData) => obj.id === action.payload.parent
+        );
+        if (newsId !== -1) {
+          state.news[newsId].kids.push(payload);
+        } /* else {
+          const parentId = JSON.parse(JSON.stringify(state)).news.findIndex(
+            (obj: NewsData) =>
+              obj.kids?.filter(
+                (o: CommentData) => o.parent === action.payload.parent
+              )[0].id
+          );
+          console.log(parentId);
+        } */
       }
-    });
-
-    builder.addCase(fetchOneItem.rejected, () => {
-      console.log("error");
     });
   },
 });

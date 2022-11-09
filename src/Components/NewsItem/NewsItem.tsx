@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
-import { increment } from "../../Redux/mainSlice";
 import { NewsData } from "../../Types/NewsData";
 import s from "./NewsItem.module.scss";
 import Rating from "@mui/material/Rating";
@@ -10,11 +8,12 @@ interface INewsItemProps {
 }
 
 const NewsItem: FC<INewsItemProps> = ({ ...props }: INewsItemProps) => {
-  const { rating, username, date, title } = props.data;
+  const { rating, username, date, title, kidsIds } = props.data;
+
   return (
-    <div className={s.NewsItem}>
+    <div className={`${s.NewsItem} ${kidsIds ? s.counter : ""}`}>
       <div className={s.info}>
-        <Rating value={rating} readOnly size="small" precision={0.1} />
+        <Rating value={rating} readOnly size="small" />
         <span className={s.nickname}>Posted by {username}</span>
         <span className={s.pub_date}>{date}</span>
       </div>

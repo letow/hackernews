@@ -3,6 +3,7 @@
   position: relative;
   border: 2px solid black;
 }
+
 .info {
   display: flex;
   justify-content: center;
@@ -13,4 +14,17 @@
   position: absolute !important;
   left: 1em;
   top: 1em;
+}
+
+.loading {
+  opacity: 0.5;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.counter {
+  text-align: start;
 }

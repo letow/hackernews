@@ -1,3 +1,4 @@
+import { CommentData } from "./CommentData";
 import { FullDateTime } from "./FullDateTime";
 
 export type NewsData = {
@@ -6,4 +7,8 @@ export type NewsData = {
   username: string;
   date: FullDateTime;
   title: string;
+  kidsIds?: number[];
+  kids: CommentData[];
+  descendants: number;
+  url: string;
 };

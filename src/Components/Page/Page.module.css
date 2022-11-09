@@ -1,1 +1,1 @@
-.Page{padding:20px;position:relative;border:2px solid #000}.info{display:flex;justify-content:center;gap:1em}.back{position:absolute !important;left:1em;top:1em}
+.Page{padding:20px;position:relative;border:2px solid #000}.info{display:flex;justify-content:center;gap:1em}.back{position:absolute !important;left:1em;top:1em}.loading{opacity:.5}.comments{display:flex;flex-direction:column;gap:1em}.counter{text-align:start}

@@ -1,0 +1,21 @@
+.Comment {
+  padding: 1em;
+}
+
+.info {
+  display: flex;
+  gap: 1em;
+  font-size: 1.1em;
+  align-items: center;
+  padding-bottom: 0.5em;
+}
+
+.time {
+  font-size: 0.8em;
+  opacity: 0.66;
+}
+
+.text {
+  padding-left: 0.5em;
+  text-align: start;
+}

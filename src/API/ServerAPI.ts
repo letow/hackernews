@@ -6,4 +6,11 @@ export const fetchNews = createAsyncThunk("news/fetchNews", async () => {
   return await response.json();
 });
 
-export default fetchNews;
+export const fetchOneItem = createAsyncThunk(
+  "news/fetchOneItem",
+  async (itemId: number) => {
+    const url = `https://hacker-news.firebaseio.com/v0/item/${itemId}.json`;
+    const response = await fetch(url);
+    return await response.json();
+  }
+);

@@ -1,40 +1,75 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NewsData } from "../../Types/NewsData";
 import s from "./Page.module.scss";
 import Button from "@mui/material/Button";
-import fetchNews from "../../API/ServerAPI";
+import { fetchOneItem } from "../../API/ServerAPI";
 import { AppDispatch } from "../../Redux/Store";
+import { store } from "../../Redux/Store";
+import Paper from "@mui/material/Paper";
+import { CommentData } from "../../Types/CommentData";
+import Comment from "../Comment/Comment";
+import { State } from "../../Types/State";
 
 interface IPageProps {
   history?: any;
-  data: NewsData;
+  id?: number;
 }
 
 const Page: FC<IPageProps> = (props) => {
-  const news = useSelector((state: any) => state.toolkit.news);
+  const id = Number(props.history.location.pathname.replace(/^\D+/g, ""));
   const dispatch = useDispatch<AppDispatch>();
-  const { history, data } = props;
+  const state = useSelector((state: State) => state);
+  const [commData, setCommData] = useState<CommentData[] | null>(null);
+  const data = store
+    .getState()
+    .toolkit.news.filter((obj: NewsData) => obj.id === id)[0];
+
+  useEffect(() => {
+    data.kidsIds
+      ? data.kidsIds.forEach((kid: number) => dispatch(fetchOneItem(kid)))
+      : "";
+  }, []);
+
+  useEffect(() => {
+    setCommData(data.kids);
+  }, [state]);
+
   return (
-    <div className={s.Page}>
-      <Button
-        className={s.back}
-        variant="outlined"
-        size="small"
-        onClick={history.goBack}
-      >
-        &#60; Back
-      </Button>
-      <a href="#" className={s.link}>
-        https://hacker-news.firebaseio.com/v0/
-      </a>
-      <h2 className={s.title}>{data.title}</h2>
-      <div className={s.info}>
-        <span className={s.nickname}>Posted by {data.username}</span>
-        <span className={s.pub_date}>{data.date}</span>
+    <Paper elevation={3}>
+      <div className={`${s.Page} ${status === "loading" ? s.loading : ""}`}>
+        <Button
+          className={s.back}
+          variant="outlined"
+          size="small"
+          onClick={props.history.goBack}
+        >
+          &#60; Back
+        </Button>
+
+        <a href={data.url} className={s.link}>
+          {data.url}
+        </a>
+        <h2 className={s.title}>{data.title}</h2>
+        <div className={s.info}>
+          <span className={s.nickname}>
+            Posted by <strong>{data.username}</strong>
+          </span>
+          <span className={s.pub_date}>{data.date}</span>
+        </div>
+        <hr />
+        <div className={s.comments}>
+          <div className={s.counter}>Comments: {data.descendants}</div>
+          {commData && (
+            <>
+              {commData.map((comment: CommentData) =>
+                comment.text ? <Comment key={comment.id} data={comment} /> : ""
+              )}
+            </>
+          )}
+        </div>
       </div>
-      <hr />
-    </div>
+    </Paper>
   );
 };
 

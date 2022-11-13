@@ -23,7 +23,6 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("first");
       dispatch(fetchNews());
     }, 60000);
     return () => clearInterval(interval);

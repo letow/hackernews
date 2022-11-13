@@ -9,7 +9,7 @@ const mainSlice = createSlice({
   initialState: {
     status: "",
     news: [],
-    lastNewsIDs: [1],
+    lastNewsIDs: [],
   } as State,
   reducers: {},
   extraReducers: (builder) => {
@@ -20,7 +20,8 @@ const mainSlice = createSlice({
     builder.addCase(fetchNews.fulfilled, (state, action) => {
       state.status = "done";
       state.lastNewsIDs = action.payload;
-      state.lastNewsIDs.length = 60;
+      state.lastNewsIDs.length = 20;
+      state.news = [];
     });
 
     builder.addCase(fetchOneItem.pending, (state) => {
@@ -60,15 +61,7 @@ const mainSlice = createSlice({
         );
         if (newsId !== -1) {
           state.news[newsId].kids.push(payload);
-        } /* else {
-          const parentId = JSON.parse(JSON.stringify(state)).news.findIndex(
-            (obj: NewsData) =>
-              obj.kids?.filter(
-                (o: CommentData) => o.parent === action.payload.parent
-              )[0].id
-          );
-          console.log(parentId);
-        } */
+        }
       }
     });
   },

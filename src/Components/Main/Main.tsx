@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NewsData } from "../../Types/NewsData";
 import NewsItem from "../NewsItem/NewsItem";
@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import s from "./Main.module.scss";
 import { Link } from "react-router-dom";
-import { fetchOneItem } from "../../API/ServerAPI";
+import { fetchNews, fetchOneItem } from "../../API/ServerAPI";
 import { AppDispatch } from "../../Redux/Store";
 
 interface IMainProps {
@@ -17,14 +17,21 @@ const Main: FC<IMainProps> = () => {
   const news: NewsData[] = useSelector((state: any) => state.toolkit.news);
   const lastNews = useSelector((state: any) => state.toolkit.lastNewsIDs);
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    lastNews.forEach((item: number) => dispatch(fetchOneItem(item)));
+  }, [lastNews]);
+
   return (
     <div className={s.Main}>
       <Button
-        onClick={() =>
-          lastNews.forEach((item: number) => dispatch(fetchOneItem(item)))
-        }
+        className={s.refresh}
+        onClick={() => {
+          dispatch(fetchNews());
+        }}
+        variant="contained"
       >
-        Hello there reload
+        Refresh
       </Button>
       {news.map((item: NewsData) => (
         <Link

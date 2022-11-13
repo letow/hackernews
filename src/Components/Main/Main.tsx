@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NewsData } from "../../Types/NewsData";
 import NewsItem from "../NewsItem/NewsItem";
@@ -6,21 +6,19 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import s from "./Main.module.scss";
 import { Link } from "react-router-dom";
-import { fetchNews, fetchOneItem } from "../../API/ServerAPI";
-import { AppDispatch } from "../../Redux/Store";
+import { fetchNews } from "../../API/ServerAPI";
+import { AppDispatch, RootState } from "../../Redux/Store";
+import { State } from "../../Types/State";
 
 interface IMainProps {
   data?: NewsData;
 }
 
 const Main: FC<IMainProps> = () => {
-  const news: NewsData[] = useSelector((state: any) => state.toolkit.news);
-  const lastNews = useSelector((state: any) => state.toolkit.lastNewsIDs);
+  const news: NewsData[] = useSelector(
+    (state: RootState) => state.toolkit.news
+  );
   const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    lastNews.forEach((item: number) => dispatch(fetchOneItem(item)));
-  }, [lastNews]);
 
   return (
     <div className={s.Main}>

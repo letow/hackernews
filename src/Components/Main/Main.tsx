@@ -8,7 +8,6 @@ import s from "./Main.module.scss";
 import { Link } from "react-router-dom";
 import { fetchNews } from "../../API/ServerAPI";
 import { AppDispatch, RootState } from "../../Redux/Store";
-import { State } from "../../Types/State";
 
 interface IMainProps {
   data?: NewsData;
@@ -27,7 +26,7 @@ const Main: FC<IMainProps> = () => {
         onClick={() => {
           dispatch(fetchNews());
         }}
-        variant="contained"
+        variant="outlined"
       >
         Refresh
       </Button>

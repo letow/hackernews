@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/letow.github.io/hackernews/static/css/main.dbaf606e.css",
-    "main.js": "/letow.github.io/hackernews/static/js/main.a57ddd6f.js",
-    "index.html": "/letow.github.io/hackernews/index.html",
-    "main.dbaf606e.css.map": "/letow.github.io/hackernews/static/css/main.dbaf606e.css.map",
-    "main.a57ddd6f.js.map": "/letow.github.io/hackernews/static/js/main.a57ddd6f.js.map"
+    "main.css": "/hackernews/static/css/main.dbaf606e.css",
+    "main.js": "/hackernews/static/js/main.a57ddd6f.js",
+    "index.html": "/hackernews/index.html",
+    "main.dbaf606e.css.map": "/hackernews/static/css/main.dbaf606e.css.map",
+    "main.a57ddd6f.js.map": "/hackernews/static/js/main.a57ddd6f.js.map"
   },
   "entrypoints": [
     "static/css/main.dbaf606e.css",
